@@ -34,6 +34,7 @@ function preload ()
 let columns;
 let roads;
 let road;
+let cursors;
 function create ()
 {
   const background = this.add.image(0, 0, 'background').setOrigin(0, 0);
@@ -60,9 +61,17 @@ function create ()
   road = roads.create(400, 568, 'road').setScale(2).refreshBody();
 
   this.physics.add.collider(bird, road);
+
+  cursors = this.input.keyboard.createCursorKeys();
   
 }
 
 function update ()
 {
+  if (cursors.up.isDown)
+  {
+    bird.setVelocityY(-160);
+    console.log("right");
+  }
+
 }
