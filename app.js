@@ -28,6 +28,7 @@ function preload ()
   this.load.image('column32By300', 'assets/column32x300.png');
   this.load.image('column32By400', 'assets/column32x400.png');
   this.load.image('column32By500', 'assets/column32x500.png');
+  this.load.spritesheet('bird', 'assets/bird.png',{ frameWidth: 64, frameHeight: 96 });
 }
 
 let columns;
@@ -51,6 +52,10 @@ function create ()
     Phaser.Display.Align.In.BottomLeft(bottom, background, i);
   }
   
+  bird = this.physics.add.sprite(100, 50, 'bird').setScale(2);
+  bird.setBounce(0.2);
+  bird.setCollideWorldBounds(true);
+
   roads.create(400, 568, 'road').setScale(2).refreshBody();
   
 }
