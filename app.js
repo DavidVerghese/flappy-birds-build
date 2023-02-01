@@ -35,6 +35,8 @@ let columns;
 let roads;
 let road;
 let cursors;
+let bird;
+let landed = false;
 function create ()
 {
   const background = this.add.image(0, 0, 'background').setOrigin(0, 0);
@@ -42,7 +44,7 @@ function create ()
   columns = this.physics.add.staticGroup();
   roads = this.physics.add.staticGroup();
   
-  for (let i = -100; i > -800; i -= 150){
+  for (let i = -200; i > -800; i -= 150){
     let picker = Math.round(Math.random() * 2);
     const columnPairings = [['column32By300', 'column32By100'], ['column32By200', 'column32By200'], ['column32By100', 'column32By300']];
     const top = columns.create(0, 0, columnPairings[picker][0]);
@@ -54,24 +56,41 @@ function create ()
     Phaser.Display.Align.In.BottomLeft(bottom, background, i);
   }
   
-  bird = this.physics.add.sprite(100, 50, 'bird').setScale(2);
+  bird = this.physics.add.sprite(0, 50, 'bird').setScale(2);
   bird.setBounce(0.2);
   bird.setCollideWorldBounds(true);
 
   road = roads.create(400, 568, 'road').setScale(2).refreshBody();
 
+  this.physics.add.overlap(bird, road, collision, null, this);
+
   this.physics.add.collider(bird, road);
 
   cursors = this.input.keyboard.createCursorKeys();
   
+
+
 }
+
+function collision() {
+  landed = true;
+}
+
 
 function update ()
 {
+
+  if (!landed) {
+    bird.body.velocity.x = 100;
+  }
+  if (landed) {
+    bird.body.velocity.x = 0;
+  }
   if (cursors.up.isDown)
   {
     bird.setVelocityY(-160);
-    console.log("right");
   }
 
+  
+  
 }
