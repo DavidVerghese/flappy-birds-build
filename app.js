@@ -23,30 +23,27 @@ function preload ()
 {
   this.load.image('background', 'assets/background.png');
   this.load.image('road', 'assets/road.png');
-  this.load.image('column', 'assets/column32x200.png');
+  this.load.image('column', 'assets/column.png');
 }
 
 let platforms;
 function create ()
 {
-  this.add.image(0, 0, 'background').setOrigin(0, 0);
+  const background = this.add.image(0, 0, 'background').setOrigin(0, 0);
 
   platforms = this.physics.add.staticGroup();
-  platforms.create(50, 0, 'column').setOrigin(0, 0);
-
-
-  // for (let xPosition = 50; xPosition < 700; xPosition += 200){
-  //   const diff = Math.random() * 0.7;
-  //   if (Math.random() > 0.5) {
-  //     platforms.create(xPosition, 500, 'column').setScale(1,[1+diff]);
-  //     platforms.create(xPosition, 0, 'column').setScale(1,[1-diff]);
-  //   } 
-  //   else {
-  //     platforms.create(xPosition, 500, 'column').setScale(1,[1+diff]);
-  //     platforms.create(xPosition, 0, 'column').setScale(1,[1-diff]);
-  //   }
-  // }
-
+  
+  for (let i = -100; i > -800; i -= 100){
+    const resize = Math.round(Math.random() * 4)+1;
+    console.log(resize, 6 - resize);
+    const top = platforms.create(0, 0, 'column').setScale(1,[resize]);;
+    const bottom = platforms.create(0, 0, 'column').setScale(1, [6 - resize]);
+    // https://phaser.io/examples/v3/category/display/align
+    // https://stackoverflow.com/questions/63978497/phaserjs-3-0-how-to-place-image-in-right-bottom-of-the-screen
+    Phaser.Display.Align.In.TopLeft(top, background,i);
+    Phaser.Display.Align.In.BottomLeft(bottom, background, i);
+  }
+  
   platforms.create(400, 568, 'road').setScale(2).refreshBody();
   
 }
