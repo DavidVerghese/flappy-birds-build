@@ -33,6 +33,7 @@ function preload ()
 
 let columns;
 let roads;
+let road;
 function create ()
 {
   const background = this.add.image(0, 0, 'background').setOrigin(0, 0);
@@ -40,7 +41,7 @@ function create ()
   columns = this.physics.add.staticGroup();
   roads = this.physics.add.staticGroup();
   
-  for (let i = -100; i > -800; i -= 100){
+  for (let i = -100; i > -800; i -= 150){
     let picker = Math.round(Math.random() * 2);
     const columnPairings = [['column32By300', 'column32By100'], ['column32By200', 'column32By200'], ['column32By100', 'column32By300']];
     const top = columns.create(0, 0, columnPairings[picker][0]);
@@ -56,7 +57,9 @@ function create ()
   bird.setBounce(0.2);
   bird.setCollideWorldBounds(true);
 
-  roads.create(400, 568, 'road').setScale(2).refreshBody();
+  road = roads.create(400, 568, 'road').setScale(2).refreshBody();
+
+  this.physics.add.collider(bird, road);
   
 }
 
