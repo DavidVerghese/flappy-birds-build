@@ -37,10 +37,11 @@ let cursors;
 let bird;
 let hasLanded = false;
 let hasBumped = false;
+let button;
 function create ()
 {
   const background = this.add.image(0, 0, 'background').setOrigin(0, 0);
-  
+
   roads = this.physics.add.staticGroup();
 
   let topColumns = this.physics.add.staticGroup({
@@ -53,8 +54,9 @@ function create ()
   let bottomColumns = this.physics.add.staticGroup({
     key: 'column32By500',
     repeat: 1,
-    setXY: { x: 350, y: 500, stepX: 300 },
+    setXY: { x: 350, y: 400, stepX: 300 },
   });
+
 
   bird = this.physics.add.sprite(0, 50, 'bird').setScale(2);
   bird.setBounce(0.2);
@@ -72,6 +74,11 @@ function create ()
   this.physics.add.collider(bird, road);
   this.physics.add.collider(bird, topColumns);
   this.physics.add.collider(bird, bottomColumns);
+  
+  // this.add.text(0, 0, 'Flappy Birds\nPress the ^ To stay upright', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',fontSize:"40px",backgroundColor:"black" });
+  const instructions = this.add.text(0, 0, `Press the "^" button to stay upright\nAnd don't hit the columns`, { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: "20px", color: "white", backgroundColor:"darkred" });
+  Phaser.Display.Align.In.BottomCenter(instructions, background, 0, 75);
+  // this.add.text(0, 0, 'Flappy Birds', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: "20px", backgroundColor: "black" });
   
   cursors = this.input.keyboard.createCursorKeys();
   
