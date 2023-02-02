@@ -63,9 +63,6 @@ function create ()
   });
   
 
-  // console.log(topColumns.children.entries[0].setScale(1,[1.8]));
-
-
   let bottomColumns = this.physics.add.staticGroup({
     key: 'column32By100',
     repeat: 5,
