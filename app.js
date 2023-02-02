@@ -24,11 +24,7 @@ function preload() {
   
   this.load.image('background', 'assets/background.png');
   this.load.image('road', 'assets/road.png');
-  this.load.image('column32By100', 'assets/column32x100.png');
-  this.load.image('column32By200', 'assets/column32x200.png');
-  this.load.image('column32By300', 'assets/column32x300.png');
-  this.load.image('column32By400', 'assets/column32x400.png');
-  this.load.image('column32By500', 'assets/column32x500.png');
+  this.load.image('column', 'assets/column.png');
   this.load.spritesheet('bird', 'assets/bird.png', { frameWidth: 64, frameHeight: 96 });
 }
 
@@ -49,12 +45,12 @@ function create() {
   const background = this.add.image(0, 0, 'background').setOrigin(0, 0);
   roads = this.physics.add.staticGroup();
   let topColumns = this.physics.add.staticGroup({
-    key: 'column32By500',
+    key: 'column',
     repeat: 1,
     setXY: { x: 200, y: 0, stepX: 300 }
   });
   let bottomColumns = this.physics.add.staticGroup({
-    key: 'column32By500',
+    key: 'column',
     repeat: 1,
     setXY: { x: 350, y: 400, stepX: 300 },
   });
