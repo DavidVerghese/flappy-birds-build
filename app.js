@@ -39,6 +39,9 @@ let hasLanded = false;
 let hasBumped = false;
 let button;
 let isGameStarted = false;
+let startButton;
+let messageToPlayer;
+let title;
 function create ()
 {
   const background = this.add.image(0, 0, 'background').setOrigin(0, 0);
@@ -76,25 +79,19 @@ function create ()
   this.physics.add.collider(bird, topColumns);
   this.physics.add.collider(bird, bottomColumns);
   
-  const instructions = this.add.text(0, 0, `Instructions: Press the "^" button to stay upright\nAnd don't hit the columns`, { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: "25px", color: "white", backgroundColor:"black" });
-  Phaser.Display.Align.In.BottomCenter(instructions, background, 0, 75);
+  messageToPlayer = this.add.text(0, 0, `Instructions: Press "^" button to start`, { fontFamily: '"Comic Sans MS", Times, serif', fontSize: "20px", color: "white", backgroundColor:"black" });
+  Phaser.Display.Align.In.BottomCenter(messageToPlayer, background, 0, 50);
 
-  const title = this.add.text(0, 0, `Flappy Birds`, { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: "80px", color: "white", backgroundColor: "black" });
+  title = this.add.text(0, 0, `Flappy Birds`, { fontFamily: '"Comic Sans MS", Times, serif', fontSize: "80px", color: "white", backgroundColor: "black" });
   Phaser.Display.Align.In.TopCenter(title, background);
-
-  const startButton = this.add.text(0, 0, `START`, { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: "80px", color: "white", backgroundColor: "darkred" });
-  Phaser.Display.Align.In.Center(startButton, background, 0, 75);
-
 
   cursors = this.input.keyboard.createCursorKeys();
   
-
 
 }
 
 function update ()
 {
-
   if (!isGameStarted) {
     bird.setVelocityY(-160);
   }
@@ -103,10 +100,17 @@ function update ()
   }
   if (hasLanded || hasBumped) {
     bird.body.velocity.x = 0;
+    messageToPlayer.text = `Oh no! You crashed!`
   }
   if (cursors.up.isDown && !hasBumped && !hasLanded &&  isGameStarted)
   {
     bird.setVelocityY(-160);
+  }
+
+  if (cursors.up.isDown && !isGameStarted) {
+    isGameStarted = true;
+    title.destroy();
+    messageToPlayer.text = `Instructions: Press the "^" button to stay upright\nAnd don't hit the columns or ground`
   }
 
   
