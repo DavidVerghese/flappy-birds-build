@@ -3,3 +3,8 @@
 Deployed site: https://lnkd.in/eJU_RMVW. This does not work at mobile at the moment. 
 
 This is a game based on Flappy Birds
+
+## Installation 
+
+You will need to have a local server to run this app. 
+If you have Visual Studio Code, you can run this app using Live Server. See here for a guide on how to setup Live Server: https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer. 
