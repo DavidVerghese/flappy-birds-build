@@ -31,7 +31,6 @@ function preload ()
   this.load.spritesheet('bird', 'assets/bird.png', { frameWidth: 64, frameHeight: 96 });
 }
 
-let columns;
 let roads;
 let road;
 let cursors;
@@ -42,31 +41,19 @@ function create ()
 {
   const background = this.add.image(0, 0, 'background').setOrigin(0, 0);
   
-  columns = this.physics.add.staticGroup();
   roads = this.physics.add.staticGroup();
-  // for (let i = -200; i > -800; i -= 150){
-  //   let picker = Math.round(Math.random() * 2);
-  //   const columnPairings = [['column32By300', 'column32By100'], ['column32By200', 'column32By200'], ['column32By100', 'column32By300']];
-  //   const top = columns.create(0, 0, columnPairings[picker][0]);
-  //   const bottom = columns.create(0, 0, columnPairings[picker][1]);
-  //   // https://phaser.io/examples/v3/category/display/align
-  //   // https://stackoverflow.com/questions/63978497/phaserjs-3-0-how-to-place-image-in-right-bottom-of-the-screen
-  //   Phaser.Display.Align.In.TopLeft(top, background,i);
-  //   Phaser.Display.Align.In.BottomLeft(bottom, background, i);
-  // }
 
   let topColumns = this.physics.add.staticGroup({
-    key: 'column32By400',
-    repeat: 5,
-    setXY: { x: 200, y: 0, stepX: 100 },
-    scaleX: 3
+    key: 'column32By500',
+    repeat: 1,
+    setXY: { x: 200, y: 0, stepX: 300 }
   });
   
 
   let bottomColumns = this.physics.add.staticGroup({
-    key: 'column32By100',
-    repeat: 5,
-    setXY: { x: 200, y: 500, stepX: 100 },
+    key: 'column32By500',
+    repeat: 1,
+    setXY: { x: 350, y: 500, stepX: 300 },
   });
 
   bird = this.physics.add.sprite(0, 50, 'bird').setScale(2);
