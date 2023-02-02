@@ -38,6 +38,7 @@ let bird;
 let hasLanded = false;
 let hasBumped = false;
 let button;
+let isGameStarted = false;
 function create ()
 {
   const background = this.add.image(0, 0, 'background').setOrigin(0, 0);
@@ -75,11 +76,16 @@ function create ()
   this.physics.add.collider(bird, topColumns);
   this.physics.add.collider(bird, bottomColumns);
   
-  // this.add.text(0, 0, 'Flappy Birds\nPress the ^ To stay upright', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif',fontSize:"40px",backgroundColor:"black" });
-  const instructions = this.add.text(0, 0, `Press the "^" button to stay upright\nAnd don't hit the columns`, { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: "20px", color: "white", backgroundColor:"darkred" });
+  const instructions = this.add.text(0, 0, `Instructions: Press the "^" button to stay upright\nAnd don't hit the columns`, { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: "25px", color: "white", backgroundColor:"black" });
   Phaser.Display.Align.In.BottomCenter(instructions, background, 0, 75);
-  // this.add.text(0, 0, 'Flappy Birds', { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: "20px", backgroundColor: "black" });
-  
+
+  const title = this.add.text(0, 0, `Flappy Birds`, { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: "80px", color: "white", backgroundColor: "black" });
+  Phaser.Display.Align.In.TopCenter(title, background);
+
+  const startButton = this.add.text(0, 0, `START`, { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: "80px", color: "white", backgroundColor: "darkred" });
+  Phaser.Display.Align.In.Center(startButton, background, 0, 75);
+
+
   cursors = this.input.keyboard.createCursorKeys();
   
 
@@ -89,13 +95,16 @@ function create ()
 function update ()
 {
 
-  if (!hasLanded) {
+  if (!isGameStarted) {
+    bird.setVelocityY(-160);
+  }
+  if (!hasLanded && isGameStarted) {
     bird.body.velocity.x = 50;
   }
   if (hasLanded || hasBumped) {
     bird.body.velocity.x = 0;
   }
-  if (cursors.up.isDown && !hasBumped && !hasLanded)
+  if (cursors.up.isDown && !hasBumped && !hasLanded &&  isGameStarted)
   {
     bird.setVelocityY(-160);
   }
