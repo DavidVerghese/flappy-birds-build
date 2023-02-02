@@ -56,7 +56,7 @@ function create ()
   // }
 
   const top = columns.create(200, 0, 'column32By100');
-  const bottom = columns.create(200, 0, 'column32By300');
+  const bottom = columns.create(200, 0, 'column32By100');
   Phaser.Display.Align.In.TopLeft(top, background,-200);
   Phaser.Display.Align.In.BottomLeft(bottom, background, -200);
   
@@ -70,9 +70,9 @@ function create ()
 
 
 
-  this.physics.add.overlap(bird, road, hasLandedIsTrue, null, this);
-  this.physics.add.overlap(bird, top, hasBumpedIsTrue,null, this);
-  this.physics.add.overlap(bird, bottom, hasBumpedIsTrue,null, this);
+  this.physics.add.overlap(bird, road, ()=>hasLanded=true, null, this);
+  this.physics.add.overlap(bird, top, ()=>hasBumped=true,null, this);
+  this.physics.add.overlap(bird, bottom, ()=>hasBumped=true,null, this);
 
   this.physics.add.collider(bird, road);
   this.physics.add.collider(bird, top);
@@ -82,13 +82,6 @@ function create ()
   
 
 
-}
-
-function hasLandedIsTrue() {
-  hasLanded = true;
-}
-function hasBumpedIsTrue() {
-  hasBumped = true;
 }
 
 function update ()
