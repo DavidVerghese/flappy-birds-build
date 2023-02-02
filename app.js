@@ -90,8 +90,9 @@ function create ()
 
 }
 
-function update ()
+function update()
 {
+  console.log(bird.x)
   if (!isGameStarted) {
     bird.setVelocityY(-160);
   }
@@ -111,6 +112,10 @@ function update ()
     isGameStarted = true;
     title.destroy();
     messageToPlayer.text = `Instructions: Press the "^" button to stay upright\nAnd don't hit the columns or ground`
+  }
+  if (bird.x > 750) {
+    bird.setVelocityY(40);
+    messageToPlayer.text = `Congrats! You won!`
   }
 
   
