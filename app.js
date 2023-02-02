@@ -55,13 +55,24 @@ function create ()
   //   Phaser.Display.Align.In.BottomLeft(bottom, background, i);
   // }
 
-  const top = columns.create(200, 0, 'column32By100');
-  const bottom = columns.create(200, 0, 'column32By100');
-  Phaser.Display.Align.In.TopLeft(top, background,-200);
-  Phaser.Display.Align.In.BottomLeft(bottom, background, -200);
+  let topColumns = this.physics.add.staticGroup({
+    key: 'column32By400',
+    repeat: 5,
+    setXY: { x: 200, y: 0, stepX: 100 },
+    scaleX: 3
+  });
   
- 
-  bird = this.physics.add.sprite(0, 50, 'bird').setScale(3);
+
+  // console.log(topColumns.children.entries[0].setScale(1,[1.8]));
+
+
+  let bottomColumns = this.physics.add.staticGroup({
+    key: 'column32By100',
+    repeat: 5,
+    setXY: { x: 200, y: 500, stepX: 100 },
+  });
+
+  bird = this.physics.add.sprite(0, 50, 'bird').setScale(2);
   bird.setBounce(0.2);
   bird.setCollideWorldBounds(true);
 
@@ -71,12 +82,12 @@ function create ()
 
 
   this.physics.add.overlap(bird, road, ()=>hasLanded=true, null, this);
-  this.physics.add.overlap(bird, top, ()=>hasBumped=true,null, this);
-  this.physics.add.overlap(bird, bottom, ()=>hasBumped=true,null, this);
+  this.physics.add.overlap(bird, topColumns, ()=>hasBumped=true,null, this);
+  this.physics.add.overlap(bird, bottomColumns, ()=>hasBumped=true,null, this);
 
   this.physics.add.collider(bird, road);
-  this.physics.add.collider(bird, top);
-  this.physics.add.collider(bird, bottom);
+  this.physics.add.collider(bird, topColumns);
+  this.physics.add.collider(bird, bottomColumns);
   
   cursors = this.input.keyboard.createCursorKeys();
   
