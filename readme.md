@@ -1,6 +1,6 @@
 ## 'Flappy Birds' Inspired Game
 
-![](https://github.com/Flappy_Birds_Build/codedex.gif)
+![](https://raw.githubusercontent.com/codedex-io/projects/main/projects/build-a-flappy-bird-clone-with-phaser/header.gif)
 
 This is a Flappy Birds clone built with HTML, JavaScript, and Phaser. I created this for the educational website Codédex. I also wrote an article explaining how to build this clone, step by step.
 
