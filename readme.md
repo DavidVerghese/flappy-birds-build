@@ -5,6 +5,7 @@
 This is a Flappy Birds clone built with HTML, JavaScript, and Phaser. I created this for the educational website Codédex. I also wrote an article explaining how to build this clone, step by step.
 
 Link to article: https://lnkd.in/eqfQeJgx
+
 Link to a deployed version of the game: https://lnkd.in/eJU_RMVW. This does not work at mobile at the moment. 
 
 ## Installation 
